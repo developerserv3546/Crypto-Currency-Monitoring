@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Crypto Currency Monitoring</string>
+    <string name="error_message">Oops, something went wrong!</string>
     <string name="action_settings">Settings</string>
 </resources>

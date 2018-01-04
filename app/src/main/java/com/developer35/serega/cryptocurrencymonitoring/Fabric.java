@@ -23,4 +23,8 @@ public class Fabric {
                 .client(httpClient.build())
                 .build();
     }
+
+    public static CoinMarketCapApi getApi() {
+        return getRetrofit().create(CoinMarketCapApi.class);
+    }
 }
