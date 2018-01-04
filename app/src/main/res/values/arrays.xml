@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="currency_array">
+        <item>@string/usd</item>
+        <item>@string/eur</item>
+        <item>@string/gbp</item>
+    </array>
+</resources>

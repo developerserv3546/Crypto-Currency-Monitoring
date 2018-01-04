@@ -8,6 +8,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.developer35.serega.cryptocurrencymonitoring.utils.UserPreferences;
@@ -32,6 +34,11 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         setToolbar();
 
+        Spinner currencySpinner = findViewById(R.id.spinner_currency);
+        int position = UserPreferences.getCurrencyPositionInSpinner(this);
+        currencySpinner.setSelection(position);
+        currencySpinner.setOnItemSelectedListener(itemSelectedListener);
+
         recyclerView = findViewById(R.id.recycle_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
@@ -50,6 +57,22 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+    private final AdapterView.OnItemSelectedListener itemSelectedListener = new AdapterView.OnItemSelectedListener() {
+        @Override
+        public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+            String currency = (String) adapterView.getItemAtPosition(i);
+            UserPreferences.setCurrency(MainActivity.this, currency);
+            if (recyclerView.getAdapter() != null) {
+                refreshCoinList();
+            }
+        }
+
+        @Override
+        public void onNothingSelected(AdapterView<?> adapterView) {
+
+        }
+    };
 
     private void refreshCoinList() {
         Call<ArrayList<CryptoCoin>> coinListCall = api.getCoinList(UserPreferences.getCurrency());
