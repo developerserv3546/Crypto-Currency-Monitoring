@@ -3,4 +3,28 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.developer35.serega.cryptocurrencymonitoring.MainActivity">
 
+    <item
+        android:id="@+id/action_refresh"
+        android:icon="@drawable/ic_refresh_24dp"
+        android:orderInCategory="100"
+        android:title="@string/refresh"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/action_sort_by_rank"
+        android:orderInCategory="100"
+        android:title="@string/sort_by_rank"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_sort_by_name"
+        android:orderInCategory="100"
+        android:title="@string/sort_by_name"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_sort_by_price"
+        android:orderInCategory="100"
+        android:title="@string/sort_by_price"
+        app:showAsAction="never" />
 </menu>

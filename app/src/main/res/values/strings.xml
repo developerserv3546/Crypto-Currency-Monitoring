@@ -5,4 +5,8 @@
     <string name="usd">USD</string>
     <string name="eur">EUR</string>
     <string name="gbp">GBP</string>
+    <string name="sort_by_price">Sort by price</string>
+    <string name="sort_by_name">Sort by name</string>
+    <string name="sort_by_rank">Sort by rank</string>
+    <string name="refresh">Refresh</string>
 </resources>

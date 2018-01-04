@@ -12,6 +12,7 @@ import android.widget.AdapterView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.developer35.serega.cryptocurrencymonitoring.utils.SortUtil;
 import com.developer35.serega.cryptocurrencymonitoring.utils.UserPreferences;
 
 import java.util.ArrayList;
@@ -25,6 +26,10 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private CoinMarketCapApi api;
     private ArrayList<CryptoCoin> coins;
+
+    private enum SortType {
+        RANK, NAME, PRICE
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,8 +88,7 @@ public class MainActivity extends AppCompatActivity {
                     ArrayList<CryptoCoin> coins = response.body();
                     if (coins != null) {
                         MainActivity.this.coins = coins;
-                        MyAdapter adapter = new MyAdapter(coins);
-                        recyclerView.setAdapter(adapter);
+                        recyclerView.setAdapter(new MyAdapter(coins));
                     } else {
                         showErrorMessage();
                     }
@@ -114,12 +118,39 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
 
-//        if (id == R.id.action_settings) {
-//            return true;
-//        }
+        switch (item.getItemId()) {
+            case R.id.action_refresh:
+                refreshCoinList();
+                return true;
+            case R.id.action_sort_by_rank:
+                sortCoinList(SortType.RANK);
+                return true;
+            case R.id.action_sort_by_name:
+                sortCoinList(SortType.NAME);
+                return true;
+            case R.id.action_sort_by_price:
+                sortCoinList(SortType.PRICE);
+                return true;
+        }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void sortCoinList(SortType type) {
+        if (recyclerView.getAdapter() != null) {
+            switch (type) {
+                case RANK:
+                    SortUtil.sortByRank(coins);
+                    break;
+                case NAME:
+                    SortUtil.sortByName(coins);
+                    break;
+                case PRICE:
+                    SortUtil.sortByPrice(coins);
+                    break;
+            }
+            recyclerView.swapAdapter(new MyAdapter(coins), true);
+        }
     }
 }
