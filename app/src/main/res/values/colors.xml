@@ -3,4 +3,6 @@
     <color name="colorPrimary">#d64c1a</color>
     <color name="colorPrimaryDark">#b94116</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="colorCoinName">#185b5c</color>
+    <color name="colorCurrencyText">#120000</color>
 </resources>

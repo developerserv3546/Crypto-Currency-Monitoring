@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/card_view_margin">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/layout_in_card_view_margin"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/txt_coin_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorCoinName"
+            android:textSize="@dimen/text_view_name_size" />
+
+        <TextView
+            android:id="@+id/txt_coin_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/text_view_currency_margin_bottom"
+            android:layout_marginTop="@dimen/text_view_currency_margin_top"
+            android:gravity="center"
+            android:textColor="@color/colorCurrencyText"
+            android:textSize="@dimen/text_view_currency_size"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="4">
+
+            <TextView
+                android:id="@+id/txt_currency_change"
+                style="@style/CurrencyChangesView"
+                android:gravity="start"
+                android:text="@string/change" />
+
+            <TextView
+                android:id="@+id/txt_change_in_1h"
+                style="@style/CurrencyChangesView" />
+
+            <TextView
+                android:id="@+id/txt_change_in_24h"
+                style="@style/CurrencyChangesView" />
+
+            <TextView
+                android:id="@+id/txt_change_in_7d"
+                style="@style/CurrencyChangesView" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+</android.support.v7.widget.CardView>

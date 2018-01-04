@@ -2,11 +2,15 @@ package com.developer35.serega.cryptocurrencymonitoring;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
+
+import com.developer35.serega.cryptocurrencymonitoring.utils.UserPreferences;
 
 import java.util.ArrayList;
 
@@ -16,6 +20,7 @@ import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
 
+    private RecyclerView recyclerView;
     private CoinMarketCapApi api;
     private ArrayList<CryptoCoin> coins;
 
@@ -23,8 +28,12 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        UserPreferences.initPreferences(this);
         setContentView(R.layout.activity_main);
         setToolbar();
+
+        recyclerView = findViewById(R.id.recycle_view);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         api = Fabric.getApi();
         refreshCoinList();
@@ -42,8 +51,8 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private void refreshCoinList(){
-        Call<ArrayList<CryptoCoin>> coinListCall = api.getCoinList("USD");
+    private void refreshCoinList() {
+        Call<ArrayList<CryptoCoin>> coinListCall = api.getCoinList(UserPreferences.getCurrency());
         coinListCall.enqueue(new Callback<ArrayList<CryptoCoin>>() {
             @Override
             public void onResponse(Call<ArrayList<CryptoCoin>> call, Response<ArrayList<CryptoCoin>> response) {
@@ -51,6 +60,8 @@ public class MainActivity extends AppCompatActivity {
                     ArrayList<CryptoCoin> coins = response.body();
                     if (coins != null) {
                         MainActivity.this.coins = coins;
+                        MyAdapter adapter = new MyAdapter(coins);
+                        recyclerView.setAdapter(adapter);
                     } else {
                         showErrorMessage();
                     }
@@ -82,9 +93,9 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        if (id == R.id.action_settings) {
-            return true;
-        }
+//        if (id == R.id.action_settings) {
+//            return true;
+//        }
 
         return super.onOptionsItemSelected(item);
     }

@@ -1,3 +1,9 @@
 <resources>
-    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="card_view_margin">5dp</dimen>
+    <dimen name="layout_in_card_view_margin">5dp</dimen>
+    <dimen name="text_view_name_size">18sp</dimen>
+    <dimen name="text_view_currency_margin_top">5dp</dimen>
+    <dimen name="text_view_currency_margin_bottom">5dp</dimen>
+    <dimen name="text_view_currency_size">16sp</dimen>
+    <dimen name="text_view_currency_change_size">12sp</dimen>
 </resources>
